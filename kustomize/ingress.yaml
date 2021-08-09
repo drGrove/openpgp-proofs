@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dannygrove-com
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    kubernetes.io/ingress.class: nginx
+spec:
+  tls:
+    - hosts:
+      - openpgp.dannygrove.com
+      secretName: openpgp-dannygrove-com-tls
+  rules:
+    - host: openpgp.dannygrove.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: pgp-proofs
+                port:
+                  number: 80

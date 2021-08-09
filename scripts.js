@@ -101,7 +101,7 @@ System.register("index", ["openpgp", "verifier"], function (exports_2, context_2
         const p = require('./proofs.json').proofs;
         const notations = lastPrimarySig.notations || [];
         const proofs = notations
-            .filter(notation => notation[0] === 'proof@metacode.biz' && typeof notation[1] === 'string')
+            .filter(notation => notation[0] === 'proof@keys.openpgp.org' && typeof notation[1] === 'string')
             .map(notation => notation[1])
             .map(proofUrl => verifier_1.getVerifier(p, proofUrl, key.primaryKey.getFingerprint()))
             .filter(verifier => verifier);
@@ -453,7 +453,7 @@ System.register("openpgp-key", ["local", "renderer", "verifier", "openpgp", "ui"
         const p = (await (await fetch(proofsUrl)).json()).proofs;
         const notations = lastPrimarySig.notations || [];
         const proofs = notations
-            .filter(notation => notation[0] === 'proof@metacode.biz' && typeof notation[1] === 'string')
+            .filter(notation => notation[0] === 'proof@keys.openpgp.org' && typeof notation[1] === 'string')
             .map(notation => notation[1])
             .map(proofUrl => verifier_2.getVerifier(p, proofUrl, key.primaryKey.getFingerprint()))
             .filter(verifier => verifier);

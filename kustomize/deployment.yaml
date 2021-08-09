@@ -1,0 +1,16 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pgp-proofs
+spec:
+  replicas: 1
+  template:
+    spec:
+      containers:
+        - name: nginx
+          image: drgrove/pgp-proofs
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP

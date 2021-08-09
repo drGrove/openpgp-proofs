@@ -91,7 +91,7 @@ function parseKey(buffer) {
                     p = require('./proofs.json').proofs;
                     notations = lastPrimarySig.notations || [];
                     proofs = notations
-                        .filter(function (notation) { return notation[0] === 'proof@metacode.biz' && typeof notation[1] === 'string'; })
+                        .filter(function (notation) { return notation[0] === 'proof@keys.openpgp.org' && typeof notation[1] === 'string'; })
                         .map(function (notation) { return notation[1]; })
                         .map(function (proofUrl) { return verifier_1.getVerifier(p, proofUrl, key.primaryKey.getFingerprint()); })
                         .filter(function (verifier) { return verifier; });

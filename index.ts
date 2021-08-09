@@ -30,7 +30,7 @@ async function parseKey(buffer: Buffer) {
     const p = require('./proofs.json').proofs;
     const notations: [string, any][] = (lastPrimarySig as any).notations || [];
     const proofs = notations
-        .filter(notation => notation[0] === 'proof@metacode.biz' && typeof notation[1] === 'string')
+        .filter(notation => notation[0] === 'proof@keys.openpgp.org' && typeof notation[1] === 'string')
         .map(notation => notation[1] as string)
         .map(proofUrl => getVerifier(p, proofUrl, key.primaryKey.getFingerprint()))
         .filter(verifier => verifier) as VerifierProof[];

@@ -52,8 +52,8 @@ async function lookupKey(query: string) {
     } else {
       keyUrl = keyLink.href;
       const response = await fetch(keyUrl);
-      const key = await response.arrayBuffer();
-      keys = (await openpgp.key.read(new Uint8Array(key))).keys;
+      const key = await response.text();
+      keys = (await openpgp.key.readArmored(key)).keys;
     }
 
     if (keys.length > 0) {
@@ -101,7 +101,7 @@ async function loadKeys(keyUrl: string, _keys: any) {
     const p = (await (await fetch(proofsUrl)).json()).proofs;
     const notations: [string, any][] = lastPrimarySig.notations || [];
     const proofs = notations
-        .filter(notation => notation[0] === 'proof@metacode.biz' && typeof notation[1] === 'string')
+        .filter(notation => notation[0] === 'proof@keys.openpgp.org' && typeof notation[1] === 'string')
         .map(notation => notation[1] as string)
         .map(proofUrl => getVerifier(p, proofUrl, key.primaryKey.getFingerprint()))
         .filter(verifier => verifier) as VerifierProof[];
